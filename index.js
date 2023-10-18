@@ -1,13 +1,3 @@
-const { mdLinks } = require('./lib/mdLinks');
+const { mdLinks } = require('./lib/md-links');
 
-module.export = {
-  mdLinks,
-};
-
-// mdLinks(pathToMarkdown)
-//   .then((links) => {
-//     console.log(links);
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });
+module.exports = mdLinks;

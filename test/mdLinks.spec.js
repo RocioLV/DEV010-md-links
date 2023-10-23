@@ -1,4 +1,4 @@
-const mdLinks = require('../lib/mdLinks');
+const mdLinks = require('../index');
 
 describe('mdLinks', () => {
   it('debería retornar un array de objetos con los enlaces encontrados en el archivo', () => {

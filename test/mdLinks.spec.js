@@ -2,50 +2,36 @@ const mdLinks = require('../lib/mdLinks');
 
 describe('mdLinks', () => {
   it('debería retornar un array de objetos con los enlaces encontrados en el archivo', () => {
-    const filePath = './ejemplos/ejemplo2.md';
-    const expected = [
-      {
-        href: 'https://www.markdownguide.org "Markdown Guide"',
-        text: 'Markdown Guide',
-        file: '/Users/shio/DEV010-md-links/ejemplos/ejemplo2.md'
-      },
-      {
-        href: 'https://nodejs.org "Node.js"',
-        text: 'Node.js',
-        file: '/Users/shio/DEV010-md-links/ejemplos/ejemplo2.md'
-      }
-    ];
-
-    return mdLinks(filePath).then((result) => {
-      expect(result).toEqual(expected);
+    return mdLinks(filePath).then(result => {
+      
+      expect(Array.isArray(result)).toBe(true); // Verifica que el resultado sea un array
+      expect(result.length).toBeGreaterThan(0); // Verifica que el resultado contenga al menos un objeto
+      expect(result).toEqual(expectedLinks); // Verifica que los enlaces sean iguales a los esperados
     });
   });
 
   it('debería rechazar con un error si la ruta no es válida', () => {
-    const filePath = 'ejemplos/archivoQueNoExiste.md';
-    const expectedError = new Error('La ruta no es válida');
-
-    return mdLinks(filePath).catch((error) => {
-      expect(error).toEqual(expectedError);
+    return mdLinks(nonExistentFilePath).catch((error) => {
+      expect(error.message).toBe(`La ruta "${nonExistentFilePath}" no existe o no es válida`);
     });
   });
 
   it('debería rechazar con un error si el archivo no es de tipo Markdown', () => {
-    const filePath = './index.js';
-    const expectedError = new Error('El archivo no es de tipo Markdown');
+    return mdLinks(nonMarkdownFilePath).catch((error) => {
+      expect(error.message).toBe(`"${nonMarkdownFilePath}" no es un archivo Markdown`);
+    });
+  });
 
+  it('debería rechazar con un error si el archivo no contiene enlaces', () => {
+    const filePath = './ejemplos/ejemplo_sin_links.md';
     return mdLinks(filePath).catch((error) => {
-      expect(error).toEqual(expectedError);
+      expect(error.message).toBe(`${filePath} no contiene enlaces en su contenido`);
     });
   });
 
   it('debería rechazar con un error si ocurre un error distinto a ENOENT', () => {
-    const filePath = '.ejemplos/ejemplo2.md';
-    const expectedError = new Error('La ruta no es válida');
-  
-    return mdLinks(filePath).catch((error) => {
-      expect(error).toEqual(expectedError);
+    return mdLinks(invalidFilePath).catch((error) => {
+      expect(error.message).toBe(`La ruta "${invalidFilePath}" no existe o no es válida`);
     });
   });
-  
 });

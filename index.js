@@ -1,3 +1,5 @@
 const { mdLinks } = require('./lib/mdLinks');
 
-module.exports = mdLinks;
+module.export = {
+    mdLinks
+};

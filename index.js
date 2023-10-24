@@ -1,12 +1,12 @@
-const absolutePath  = require('./lib/absolutePath.js');
-const pathExists = require('./lib/pathExists.js');
-const isMarkdownFile = require('./lib/isMarkdownFile.js');
-const readFile = require('./lib/readFile.js');
-const findLinks = require('./lib/findLinks.js');
-const validateLinks = require('./lib/validateLinks.js')
+const absolutePath  = require('./lib/absolutePath');
+const pathExists = require('./lib/pathExists');
+const isMarkdownFile = require('./lib/isMarkdownFile');
+const readFile = require('./lib/readFile');
+const findLinks = require('./lib/findLinks');
+const validateLinks = require('./lib/validateLinks')
 
 function mdLinks(path) {
-  const validPath = absolutePath(path, validate = false);
+  const validPath = absolutePath(path, validate);
   try {
     pathExists(validPath);
   } catch (error) {
@@ -26,20 +26,3 @@ function mdLinks(path) {
 }
 
 module.exports = mdLinks
-
-
-// function mdLinks(path){
-//     const validPath = absolutePath(path);
-//     return pathExists(validPath)
-//     .then(() => isMarkdownFile(validPath))
-//     .then(() => readFile(validPath))
-//     .then((content) => {
-//       const links = findLinks(content, validPath);
-//       // if(validate){
-//       //   return validateLinks(links);
-//       // }
-//       return links;
-//     });
-//   }
-
-// module.exports = mdLinks

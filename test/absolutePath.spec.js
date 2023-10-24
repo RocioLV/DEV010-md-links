@@ -1,5 +1,5 @@
 const path = require('node:path');
-const absolutePath = require('../lib/absolutePath.js');
+const absolutePath = require('../lib/absolutePath');
 
 describe('absolutePath', () => {
   it('should be a function', () => {

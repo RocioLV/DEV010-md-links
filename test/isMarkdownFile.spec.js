@@ -1,4 +1,4 @@
-const isMarkdownFile = require('../lib/isMarkdownFile.js');
+const isMarkdownFile = require('../lib/isMarkdownFile');
 
 describe('isMarkdownFile', () => {
   it('should return true for valid Markdown file extensions', () => {

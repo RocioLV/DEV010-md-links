@@ -1,6 +1,6 @@
-const mdLinks = require('./mdLinks.js'); // Asegúrate de que el módulo esté en el directorio correcto
+const mdLinks = require('./index'); // Asegúrate de que el módulo esté en el directorio correcto
 
-const pathToMarkdownFile = 'README.md';
+const pathToMarkdownFile = './README.md';
 
 mdLinks(pathToMarkdownFile)
   .then((links) => {

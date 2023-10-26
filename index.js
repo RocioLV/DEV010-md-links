@@ -1,33 +1,27 @@
-const absolutePath = require('./lib/absolutePath');
+const makeAbsolute = require('./lib/makeAbsolute');
 const pathExists = require('./lib/pathExists');
 const isMarkdownFile = require('./lib/isMarkdownFile');
-const readAndFindLinks = require('./lib/readAndFindLinks');
+const readFileContent = require('./lib/readFileContent');
+const extractLinks = require('./lib/extractLinks');
 const validateLinks = require('./lib/validateLinks');
-const fs = require('fs').promises;
 
-function mdLinks(filePath) {
-  return absolutePath(filePath)
-    .then((validPath) => {
-      return pathExists(validPath)
-        .then(() => isMarkdownFile(validPath))
-        .then((isMarkdown) => {
-          if (!isMarkdown) {
-            return Promise.reject(new Error('La ruta no es un archivo Markdown o no existe.'));
-          }
-          return fs.readFile(validPath, 'utf-8')
-            .then((content) => readAndFindLinks(content, validPath))
-            .then((links) => {
-              if (links) {
-                return validateLinks(links);
-              }
-            });
-        });
+function mdLinks(path, validate = false) {
+  const absolutePath = makeAbsolute(path);
+  console.log(`Path: ${path}, Validate: ${validate}`);
+  return pathExists(absolutePath)
+    .then(() => isMarkdownFile(absolutePath))
+    .then(() => readFileContent(absolutePath))
+    .then((content) => {
+      const links = extractLinks(content, absolutePath);
+      if (validate) {
+        return validateLinks(links);
+      }
+      console.log(`Ver si sale ${path}`);
+      return links;
     });
 }
 
 module.exports = mdLinks;
-
-
 
 // function mdLinks(filePath) {
 //   const validPath = absolutePath(filePath);

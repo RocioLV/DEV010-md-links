@@ -1,11 +1,11 @@
-const findLinks = require('../lib/findLinks');
+const extractLinks = require('../lib/extractLinks');
 
-describe('findLinks', () => {
+describe('extractLinks', () => {
   test('should extract links from content with one link', () => {
     const content = 'This is a [sample link](https://example.com) in the content.';
     const filePath = '/path/to/file.md';
 
-    const result = findLinks(content, filePath);
+    const result = extractLinks(content, filePath);
 
     expect(result).toEqual([
       {
@@ -22,7 +22,7 @@ describe('findLinks', () => {
       `;
     const filePath = '/path/to/another/file.md';
 
-    const result = findLinks(content, filePath);
+    const result = extractLinks(content, filePath);
 
     expect(result).toEqual([
       {
@@ -42,7 +42,7 @@ describe('findLinks', () => {
     const content = 'This content has no links.';
     const filePath = '/path/to/file.txt';
 
-    const result = findLinks(content, filePath);
+    const result = extractLinks(content, filePath);
 
     expect(result).toEqual([]);
   });

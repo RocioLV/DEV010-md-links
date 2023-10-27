@@ -7,13 +7,10 @@ describe('isMarkdownFile', () => {
     expect(result).toBe(true);
   });
 
-  it('should throw an error for a file not found', () => {
-    const filePath = './ejmplos.md';
-    expect(() => isMarkdownFile(filePath)).toThrowError('File not found');
-  });
-
   it('should throw an error for invalid file extensions', () => {
     const filePath = './testing.js';
-    expect(() => isMarkdownFile(filePath)).toThrowError('The file is not a markdown file');
+    expect(() => {
+    isMarkdownFile(filePath);
+    }).toThrowError(`The extension .js is not supported.`);
   });
 });

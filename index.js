@@ -5,7 +5,7 @@ const readFileContent = require('./lib/readFileContent');
 const extractLinks = require('./lib/extractLinks');
 const validateLinks = require('./lib/validateLinks');
 
-function mdLinks(path, validate = false) {
+function mdLinks(path, validate) {
   const absolutePath = makeAbsolute(path);
   console.log(`Path: ${path}, Validate: ${validate}`);
   return pathExists(absolutePath)
@@ -16,7 +16,6 @@ function mdLinks(path, validate = false) {
       if (validate) {
         return validateLinks(links);
       }
-      console.log(`Ver si sale ${path}`);
       return links;
     });
 }

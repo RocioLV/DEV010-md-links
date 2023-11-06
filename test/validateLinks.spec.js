@@ -38,10 +38,13 @@ describe('validateLinks', () => {
   
   it('should handle both valid and invalid links and return objects with appropriate status and statusText properties', async () => {
     const links = [
+      //  crea un array de objetos links con dos elementos, cada uno con una propiedad href y text
       { href: 'https://www.example.com', text: 'Example' },
       { href: 'https://www.invalid.com', text: 'Invalid' },
     ];
     const result = await validateLinks(links);
+    // luego llama a la función validateLinks pasando el array de enlaces 
+    // y espera que el resultado sea un array de objetos con las propiedades status y statusText apropiadas
     expect(result).toEqual([
       {
         href: 'https://www.example.com', text: 'Example', status: 200, statusText: 'OK',
@@ -52,4 +55,3 @@ describe('validateLinks', () => {
     ]);
   });  
 });
-// Este código prueba la función validateLinks para verificar si maneja correctamente los enlaces válidos e inválidos. Crea un array de objetos links con dos elementos, cada uno con una propiedad href y text. Luego llama a la función validateLinks pasando el array de enlaces y espera que el resultado sea un array de objetos con las propiedades status y statusText apropiadas. En este caso, se espera que el primer enlace tenga un estado 200 (OK) y el segundo enlace tenga un estado nulo y un texto de estado "Fail connection".

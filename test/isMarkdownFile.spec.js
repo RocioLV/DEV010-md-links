@@ -13,4 +13,5 @@ describe('isMarkdownFile', () => {
     isMarkdownFile(filePath);
     }).toThrowError(`The extension .js is not supported.`);
   }); // verifica que se lance un error para las extensiones de archivo no válidas
+      // se usa expect junto con toThrowError para verificar que cuando se llama a isMarkdownFile(filePath), se lance el error
 });
